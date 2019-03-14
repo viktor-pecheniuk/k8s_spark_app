@@ -1,4 +1,4 @@
-package scala.etl
+package etl
 
 import org.apache.log4j.LogManager
 import org.apache.spark.sql.{SQLContext, SparkSession}
@@ -15,6 +15,7 @@ object SparkRunner {
     val spark = SparkSession.builder()
       .master("local")
       .appName("Spark CSV Reader")
+      .enableHiveSupport()
       .getOrCreate
 
     val shopsDF = spark.read.options(Map("inferSchema"->"true","sep"->",","header"->"true")).csv(
